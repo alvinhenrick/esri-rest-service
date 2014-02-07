@@ -1,0 +1,41 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-snapshot" }
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RC1")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'esri-rest-service'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.0.0.RC1")
+    compile("com.fasterxml.jackson.core:jackson-databind")
+    compile("com.esri.geometry:esri-geometry-api:1.1.1")
+    compile("org.mapfish.geo:mapfish-geo-lib:1.2.0")
+    compile("com.esri.hadoop:spatial-sdk-json:1.0.2")
+    compile files('./src/main/lib/spatial-sdk-hadoop.jar')
+    //compile ("com.esri.hadoop:spatial-sdk-hadoop:1.0.2@pom")
+
+    testCompile("junit:junit:4.11")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.10'
+}
