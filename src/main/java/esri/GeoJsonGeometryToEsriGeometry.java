@@ -26,7 +26,7 @@ public class GeoJsonGeometryToEsriGeometry implements Converter<MfGeometry, Geom
 
         final GeometryType geometryType = getGeometryType(source.getInternalGeometry().getClass());
         final String wktString = source.getInternalGeometry().toText();
-        //source.getInternalGeometry().setSRID(4326);
+        source.getInternalGeometry().setSRID(4326);
         Geometry returnValue = null;
 
         switch (geometryType) {
@@ -78,6 +78,7 @@ public class GeoJsonGeometryToEsriGeometry implements Converter<MfGeometry, Geom
         for (int i = 0; i < source.getInternalGeometry().getNumGeometries(); i++) {
             com.vividsolutions.jts.geom.Geometry nextGeometry = source.getInternalGeometry().getGeometryN(i);
             if (isCompatible(firstGeometry, nextGeometry)) {
+                nextGeometry.setSRID(4326);
                 filteredGeometries.add(nextGeometry);
             }
         }
@@ -87,6 +88,7 @@ public class GeoJsonGeometryToEsriGeometry implements Converter<MfGeometry, Geom
 
         final MfGeometry mfGeometry = new MfGeometry(newGeometry);
         final GeometryType newGeometryType = getGeometryType(mfGeometry.getInternalGeometry().getClass());
+        mfGeometry.getInternalGeometry().setSRID(4326);
         final String wktString = mfGeometry.getInternalGeometry().toText();
 
         switch (newGeometryType) {
