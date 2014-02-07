@@ -65,7 +65,7 @@ public class GeoJsonToEsriController {
                 case GEOMETRY:
                     final MfGeometry mfGeometry = (MfGeometry) mfGeo;
                     final Geometry geometry = geoJsonGeometryToEsriGeometry.convert(mfGeometry);
-                    returnValue = OperatorExportToJson.local().execute(SpatialReference.create("4326"), geometry);
+                    returnValue = OperatorExportToJson.local().execute(SpatialReference.create("4326"),geometry);
                     break;
 
             }

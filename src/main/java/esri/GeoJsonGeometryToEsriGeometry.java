@@ -26,6 +26,7 @@ public class GeoJsonGeometryToEsriGeometry implements Converter<MfGeometry, Geom
 
         final GeometryType geometryType = getGeometryType(source.getInternalGeometry().getClass());
         final String wktString = source.getInternalGeometry().toText();
+        //source.getInternalGeometry().setSRID(4326);
         Geometry returnValue = null;
 
         switch (geometryType) {
@@ -58,7 +59,8 @@ public class GeoJsonGeometryToEsriGeometry implements Converter<MfGeometry, Geom
                 break;
 
         }
-
+        if (null != returnValue) {
+        }
         return returnValue;
     }
 
